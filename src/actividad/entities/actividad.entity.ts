@@ -17,7 +17,9 @@ export class Actividad {
   @Column()
   cupoMaximo: number;
   @Column()
-  esatdo: number;
+  estado: number;
+  @Column()
+  titulo: string;
 
   @OneToMany(() => Resena, (resena) => resena.actividad)
   resenas: Resena[];

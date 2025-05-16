@@ -1,26 +1,88 @@
 import { Injectable } from '@nestjs/common';
-import { CreateEstudianteDto } from './dto/create-estudiante.dto';
-import { UpdateEstudianteDto } from './dto/update-estudiante.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Actividad } from 'src/actividad/entities/actividad.entity';
+import { Estudiante } from 'src/estudiante/entities/estudiante.entity';
+import {
+  BusinessError,
+  BusinessLogicException,
+} from 'src/shared/errors/business-errors';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class EstudianteService {
-  create(createEstudianteDto: CreateEstudianteDto) {
-    return 'This action adds a new estudiante';
+  constructor(
+    @InjectRepository(Estudiante)
+    private readonly estudianteRepository: Repository<Estudiante>,
+    @InjectRepository(Actividad)
+    private readonly actividadRepository: Repository<Actividad>,
+  ) {}
+
+  async crearEstudiante(estudiante: Estudiante) {
+    const estudianteCorreo = estudiante.correo;
+    if (!estudianteCorreo.includes('@') && !estudianteCorreo.includes('.')) {
+      throw new BusinessLogicException(
+        'El correo del estudiante no es válido',
+        BusinessError.PRECONDITION_FAILED,
+      );
+    }
+
+    if (estudiante.semetre < 1 || estudiante.semetre > 10) {
+      throw new BusinessLogicException(
+        'El semestre del estudiante no es válido',
+        BusinessError.PRECONDITION_FAILED,
+      );
+    }
+    return await this.estudianteRepository.save(estudiante);
   }
 
-  findAll() {
-    return `This action returns all estudiante`;
+  async findEstudianteById(id: number) {
+    return await this.estudianteRepository.findOne({
+      where: { id },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} estudiante`;
-  }
+  async incribirseActividad(idEstudiante: number, idActividad: number) {
+    const estudiante = await this.estudianteRepository.findOne({
+      where: { id: idEstudiante },
+      relations: ['actividades'],
+    });
+    if (!estudiante) {
+      throw new BusinessLogicException(
+        'El estudiante no existe',
+        BusinessError.NOT_FOUND,
+      );
+    }
+    const actividad = await this.actividadRepository.findOne({
+      where: { id: idActividad },
+      relations: ['estudiantes'],
+    });
+    if (!actividad) {
+      throw new BusinessLogicException(
+        'La actividad no existe',
+        BusinessError.NOT_FOUND,
+      );
+    }
 
-  update(id: number, updateEstudianteDto: UpdateEstudianteDto) {
-    return `This action updates a #${id} estudiante`;
-  }
+    if (actividad.estado !== 0) {
+      throw new BusinessLogicException(
+        'La actividad no esta disponible',
+        BusinessError.PRECONDITION_FAILED,
+      );
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} estudiante`;
+    if (estudiante.actividades.length !== 0) {
+      throw new BusinessLogicException(
+        'El estudiante no puede tener inscripciones previas',
+        BusinessError.PRECONDITION_FAILED,
+      );
+    }
+
+    estudiante.actividades.push(actividad);
+    actividad.estudiantes.push(estudiante);
+
+    await this.estudianteRepository.save(estudiante);
+    await this.actividadRepository.save(actividad);
+
+    return estudiante;
   }
 }

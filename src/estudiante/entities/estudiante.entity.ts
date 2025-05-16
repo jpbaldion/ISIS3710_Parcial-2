@@ -21,6 +21,8 @@ export class Estudiante {
   progrma: string;
   @Column()
   semetre: number;
+  @Column()
+  correo: string;
 
   @OneToMany(() => Resena, (resena) => resena.estudiante)
   resenas: Resena[];
