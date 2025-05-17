@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Test, TestingModule } from '@nestjs/testing';
 import { EstudianteService } from './estudiante.service';
 import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
@@ -35,7 +32,7 @@ describe('EstudianteService', () => {
   });
 
   const seedDatabase = async () => {
-    estudiantesRepository.clear();
+    await estudiantesRepository.clear();
     estudianteList = [];
 
     for (let i = 0; i < 5; i++) {
@@ -52,7 +49,7 @@ describe('EstudianteService', () => {
       titulo: faker.lorem.sentence(),
       fecha: faker.date.past().toString(),
       cupoMaximo: faker.number.int({ min: 1, max: 100 }),
-      estado: faker.number.int({ min: 0, max: 3 }),
+      estado: 0,
     });
   };
   it('should be defined', () => {
@@ -122,7 +119,7 @@ describe('EstudianteService', () => {
 
   it('deberia obtener un estudiante por id', async () => {
     const estudiante: Estudiante = estudianteList[0];
-    const foundEstudiante: Estudiante | null = await service.findEstudianteById(
+    const foundEstudiante: Estudiante = await service.findEstudianteById(
       estudiante.id,
     );
     expect(foundEstudiante).not.toBeNull();

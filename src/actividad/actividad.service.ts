@@ -15,11 +15,21 @@ export class ActividadService {
   ) {}
 
   async crearActividades(actividad: Actividad) {
+    const simbolos = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')'];
     if (actividad.titulo.length < 15) {
       throw new BusinessLogicException(
         'Caracteres minimos 15 para el titulo',
         BusinessError.PRECONDITION_FAILED,
       );
+    }
+
+    for (const simbolo of simbolos) {
+      if (actividad.titulo.includes(simbolo)) {
+        throw new BusinessLogicException(
+          'El titulo no puede contener simbolos',
+          BusinessError.PRECONDITION_FAILED,
+        );
+      }
     }
     return await this.actividadRepository.save(actividad);
   }
@@ -45,9 +55,11 @@ export class ActividadService {
     }
 
     if (estado === 1) {
-      if (actividad.estudiantes.length < actividad.cupoMaximo * 0.8) {
+      if (
+        actividad.estudiantes.length < Math.floor(actividad.cupoMaximo * 0.8)
+      ) {
         throw new BusinessLogicException(
-          'No puede poner este estado a una actividad con cupo',
+          'No puede poner este estado a una actividad con cupo menor al 80%',
           BusinessError.PRECONDITION_FAILED,
         );
       }
@@ -60,7 +72,7 @@ export class ActividadService {
       }
     }
     actividad.estado = estado;
-    await this.actividadRepository.save(actividad);
+    return await this.actividadRepository.save(actividad);
   }
 
   async findActividadesByFecha(fecha: string) {

@@ -60,8 +60,16 @@ export class ResenaService {
   }
 
   async findResenaById(id: number) {
-    return await this.resenaRepository.findOne({
+    const resena = await this.resenaRepository.findOne({
       where: { id },
     });
+
+    if (!resena) {
+      throw new BusinessLogicException(
+        `No se encontró la reseña con el id ${id}`,
+        BusinessError.NOT_FOUND,
+      );
+    }
+    return resena;
   }
 }
