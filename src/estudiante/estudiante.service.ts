@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Actividad } from 'src/actividad/entities/actividad.entity';
-import { Estudiante } from 'src/estudiante/entities/estudiante.entity';
+import { Actividad } from '../actividad/entities/actividad.entity';
+import { Estudiante } from '../estudiante/entities/estudiante.entity';
 import {
   BusinessError,
   BusinessLogicException,
-} from 'src/shared/errors/business-errors';
+} from '../shared/errors/business-errors';
 import { Repository } from 'typeorm';
 
 @Injectable()

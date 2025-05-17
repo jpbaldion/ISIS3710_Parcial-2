@@ -5,6 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ActividadModule } from './actividad/actividad.module';
 import { ResenaModule } from './resena/resena.module';
 import { EstudianteModule } from './estudiante/estudiante.module';
+import { Actividad } from './actividad/entities/actividad.entity';
+import { Estudiante } from './estudiante/entities/estudiante.entity';
+import { Resena } from './resena/entities/resena.entity';
 
 @Module({
   imports: [
@@ -15,7 +18,7 @@ import { EstudianteModule } from './estudiante/estudiante.module';
       username: 'postgres',
       password: 'postgres',
       database: 'db',
-      entities: [],
+      entities: [Actividad, Estudiante, Resena],
       dropSchema: true,
       synchronize: true,
     }),

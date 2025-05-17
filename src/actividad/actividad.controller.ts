@@ -1,45 +1,26 @@
-// import {
-//   Controller,
-//   Get,
-//   Post,
-//   Body,
-//   Patch,
-//   Param,
-//   Delete,
-// } from '@nestjs/common';
-// import { ActividadService } from './actividad.service';
-// import { CreateActividadDto } from './dto/create-actividad.dto';
-// import { UpdateActividadDto } from './dto/update-actividad.dto';
+import { Controller, Get, Post, Body, Put, Param, Query } from '@nestjs/common';
+import { ActividadService } from './actividad.service';
+import { ActividadDto } from './dto/actividad.dto';
+import { plainToInstance } from 'class-transformer';
+import { Actividad } from './entities/actividad.entity';
 
-// @Controller('actividad')
-// export class ActividadController {
-//   constructor(private readonly actividadService: ActividadService) {}
+@Controller('actividades')
+export class ActividadController {
+  constructor(private readonly actividadService: ActividadService) {}
 
-//   @Post()
-//   create(@Body() createActividadDto: CreateActividadDto) {
-//     return this.actividadService.create(createActividadDto);
-//   }
+  @Post()
+  create(@Body() actividadDto: ActividadDto) {
+    const actividad = plainToInstance(Actividad, actividadDto);
+    return this.actividadService.crearActividades(actividad);
+  }
 
-//   @Get()
-//   findAll() {
-//     return this.actividadService.findAll();
-//   }
+  @Get()
+  findAll(@Query('fecha') fecha: string) {
+    return this.actividadService.findActividadesByFecha(fecha);
+  }
 
-//   @Get(':id')
-//   findOne(@Param('id') id: string) {
-//     return this.actividadService.findOne(+id);
-//   }
-
-//   @Patch(':id')
-//   update(
-//     @Param('id') id: string,
-//     @Body() updateActividadDto: UpdateActividadDto,
-//   ) {
-//     return this.actividadService.update(+id, updateActividadDto);
-//   }
-
-//   @Delete(':id')
-//   remove(@Param('id') id: string) {
-//     return this.actividadService.remove(+id);
-//   }
-// }
+  @Put(':id')
+  update(@Param(':id') id: string, @Query('estado') estado: number) {
+    return this.actividadService.cambiarEstado(+id, estado);
+  }
+}

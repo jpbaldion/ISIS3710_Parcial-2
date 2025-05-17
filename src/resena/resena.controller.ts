@@ -1,42 +1,21 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { ResenaService } from './resena.service';
-import { CreateResenaDto } from './dto/create-resena.dto';
-import { UpdateResenaDto } from './dto/update-resena.dto';
+import { ResenaDetailDto } from './dto/resenaDetail.dto';
+import { plainToInstance } from 'class-transformer';
+import { Resena } from './entities/resena.entity';
 
 @Controller('resena')
 export class ResenaController {
   constructor(private readonly resenaService: ResenaService) {}
 
   @Post()
-  create(@Body() createResenaDto: CreateResenaDto) {
-    return this.resenaService.create(createResenaDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.resenaService.findAll();
+  create(@Body() createResenaDto: ResenaDetailDto) {
+    const resena = plainToInstance(Resena, createResenaDto);
+    return this.resenaService.agregarReseña(resena);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.resenaService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateResenaDto: UpdateResenaDto) {
-    return this.resenaService.update(+id, updateResenaDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.resenaService.remove(+id);
+    return this.resenaService.findResenaById(+id);
   }
 }

@@ -1,5 +1,5 @@
-import { Actividad } from 'src/actividad/entities/actividad.entity';
-import { Resena } from 'src/resena/entities/resena.entity';
+import { Actividad } from '../../actividad/entities/actividad.entity';
+import { Resena } from '../../resena/entities/resena.entity';
 import {
   Column,
   Entity,

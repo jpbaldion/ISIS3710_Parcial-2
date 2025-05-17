@@ -1,45 +1,32 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { EstudianteService } from './estudiante.service';
-import { CreateEstudianteDto } from './dto/create-estudiante.dto';
-import { UpdateEstudianteDto } from './dto/update-estudiante.dto';
+import { EstudianteDto } from './dto/estudiante.dto';
+import { Estudiante } from './entities/estudiante.entity';
+import { plainToInstance } from 'class-transformer';
 
-@Controller('estudiante')
+@Controller('estudiantes')
 export class EstudianteController {
   constructor(private readonly estudianteService: EstudianteService) {}
 
   @Post()
-  create(@Body() createEstudianteDto: CreateEstudianteDto) {
-    return this.estudianteService.create(createEstudianteDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.estudianteService.findAll();
+  async create(@Body() estudianteDto: EstudianteDto) {
+    const estudiante: Estudiante = plainToInstance(Estudiante, estudianteDto);
+    return await this.estudianteService.crearEstudiante(estudiante);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.estudianteService.findOne(+id);
+    return this.estudianteService.findEstudianteById(+id);
   }
 
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateEstudianteDto: UpdateEstudianteDto,
+  @Post(':idEstudiante/actividades/:idActividad')
+  async incribirseActividad(
+    @Param('idEstudiante') idEstudiante: string,
+    @Param('idActividad') idActividad: string,
   ) {
-    return this.estudianteService.update(+id, updateEstudianteDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.estudianteService.remove(+id);
+    return await this.estudianteService.incribirseActividad(
+      +idEstudiante,
+      +idActividad,
+    );
   }
 }
