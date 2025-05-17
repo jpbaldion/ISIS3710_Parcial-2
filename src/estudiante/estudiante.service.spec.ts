@@ -15,7 +15,6 @@ describe('EstudianteService', () => {
   let service: EstudianteService;
   let actividadRepository: Repository<Actividad>;
   let estudiantesRepository: Repository<Estudiante>;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let actividad: Actividad;
   let estudianteList: Estudiante[];
 
