@@ -14,13 +14,13 @@ export class Estudiante {
   @PrimaryGeneratedColumn()
   id: number;
   @Column()
-  nomber: string;
+  nombre: string;
   @Column()
   cedula: number;
   @Column()
-  progrma: string;
+  programa: string;
   @Column()
-  semetre: number;
+  semestre: number;
   @Column()
   correo: string;
 

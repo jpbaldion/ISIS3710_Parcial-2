@@ -26,7 +26,7 @@ export class EstudianteService {
       );
     }
 
-    if (estudiante.semetre < 1 || estudiante.semetre > 10) {
+    if (estudiante.semestre < 1 || estudiante.semestre > 10) {
       throw new BusinessLogicException(
         'El semestre del estudiante no es válido',
         BusinessError.PRECONDITION_FAILED,
@@ -36,9 +36,16 @@ export class EstudianteService {
   }
 
   async findEstudianteById(id: number) {
-    return await this.estudianteRepository.findOne({
+    const estudiante = await this.estudianteRepository.findOne({
       where: { id },
     });
+    if (!estudiante) {
+      throw new BusinessLogicException(
+        'El estudiante no existe',
+        BusinessError.NOT_FOUND,
+      );
+    }
+    return estudiante;
   }
 
   async incribirseActividad(idEstudiante: number, idActividad: number) {
