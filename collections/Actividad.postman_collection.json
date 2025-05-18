@@ -1,0 +1,959 @@
+{
+	"info": {
+		"_postman_id": "ec079a0a-58d6-4e0e-bf7d-07e886eadfb1",
+		"name": "Actividad",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42132129"
+	},
+	"item": [
+		{
+			"name": "Crear Actividad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"actividad_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"Parcial 2 Practico Web\",\r\n    \"fecha\": \"17-05-2025\",\r\n    \"cupoMaximo\": 2,\r\n    \"estado\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/actividades",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"actividades"
+					]
+				},
+				"description": "Se prueba este servicio ya que es el que permite probar si una actividad se crea."
+			},
+			"response": [
+				{
+					"name": "Crear Actividad Ejemplo",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Parcial 2 Practico Web\",\r\n    \"fecha\": \"17-05-2025\",\r\n    \"cupoMaximo\": 3,\r\n    \"estado\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/actividades",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"actividades"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "89"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"59-FQF3gTZ6TblRCB4cVNx0LKdYtxc\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 17 May 2025 18:55:27 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"fecha\": \"17-05-2025\",\n    \"cupoMaximo\": 3,\n    \"estado\": 0,\n    \"titulo\": \"Parcial 2 Practico Web\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear Actividad con un titulo muy corto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {\r",
+							"   pm.response.to.have.status(412);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"Caracteres minimos 15 para el titulo\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"Parcial\",\r\n    \"fecha\": \"17-05-2025\",\r\n    \"cupoMaximo\": 3,\r\n    \"estado\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/actividades",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"actividades"
+					]
+				},
+				"description": "Se prueba este servicio ya que es el que permite probar si se validan las reglas de negocio y cualque error encontrado lo devuelve de forma diciente."
+			},
+			"response": [
+				{
+					"name": "Crear Actividad con un titulo muy corto",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Parcial\",\r\n    \"fecha\": \"17-05-2025\",\r\n    \"cupoMaximo\": 3,\r\n    \"estado\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/actividades",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"actividades"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "67"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"43-w8WagYJGxQVs6uMezIT2MFFRLcs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 17 May 2025 18:56:59 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"Caracteres minimos 15 para el titulo\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear Actividad con simbolos en el titulo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {\r",
+							"   pm.response.to.have.status(412);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"El titulo no puede contener simbolos\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"#Parcial 2 Practico Web\",\r\n    \"fecha\": \"17-05-2025\",\r\n    \"cupoMaximo\": 3,\r\n    \"estado\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/actividades",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"actividades"
+					]
+				},
+				"description": "Se prueba este servicio ya que es el que permite probar si se validan las reglas de negocio y cualque error encontrado lo devuelve de forma diciente."
+			},
+			"response": [
+				{
+					"name": "Crear Actividad con simbolos en el titulo - Ejemplo",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"#Parcial 2 Practico Web\",\r\n    \"fecha\": \"17-05-2025\",\r\n    \"cupoMaximo\": 3,\r\n    \"estado\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/actividades",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"actividades"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "67"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"43-wdN1O5Y4j7N/Q9CzX5a4o1RCyYw\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 17 May 2025 18:58:13 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"El titulo no puede contener simbolos\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear Estudiante",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"estudiante_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Juan Pablo\",\r\n    \"cedula\": 1025553432,\r\n    \"correo\": \"j.baldion@uniandes.edu.co\",\r\n    \"programa\": \"Ing. Sistemas\",\r\n    \"semestre\": 7\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/estudiantes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiantes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Ejemplo crear Estudiante",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Juan Pablo\",\r\n    \"cedula\": 1025553432,\r\n    \"correo\": \"j.baldion@uniandes.edu.co\",\r\n    \"programa\": \"Ing. Sistemas\",\r\n    \"semestre\": 7\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/estudiantes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiantes"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "127"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"7f-oaFYNYkB+E71ur7FfCDiKRxBwKs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 17 May 2025 18:24:29 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"nombre\": \"Juan Pablo\",\n    \"cedula\": 1025553432,\n    \"programa\": \"Ing. Sistemas\",\n    \"semestre\": 7,\n    \"correo\": \"j.baldion@uniandes.edu.co\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Inscribir un estudiante a una actividad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"estudiante_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/estudiantes/{{estudiante_id}}/actividades/{{actividad_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiantes",
+						"{{estudiante_id}}",
+						"actividades",
+						"{{actividad_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Ejemplo inscribir estudiante en un actividad",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/estudiantes/1/actividades/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiantes",
+								"1",
+								"actividades",
+								"1"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "233"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"e9-6hQmfrOCnvuiGde9A9IZTwgQdTw\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 02:38:11 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"nombre\": \"Juan Pablo\",\n    \"cedula\": 1025553432,\n    \"programa\": \"Ing. Sistemas\",\n    \"semestre\": 7,\n    \"correo\": \"j.baldion@uniandes.edu.co\",\n    \"actividades\": [\n        {\n            \"id\": 1,\n            \"fecha\": \"17-05-2025\",\n            \"cupoMaximo\": 2,\n            \"estado\": 0,\n            \"titulo\": \"Parcial 2 Practico Web\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Cambiar estado de una actividad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{baseUrl}}/actividades/{{actividad_id}}?estado=1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"actividades",
+						"{{actividad_id}}"
+					],
+					"query": [
+						{
+							"key": "estado",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Se prueba este servicio ya que es el que permite probar es posible cambiar el estado de una actividad"
+			},
+			"response": [
+				{
+					"name": "Cambiar estado de una actividad",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/actividades/1?estado=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"actividades",
+								"1"
+							],
+							"query": [
+								{
+									"key": "estado",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "233"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"e9-m2IxIADb5/2i1q6ykvYenM4vY2E\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 02:38:15 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"fecha\": \"17-05-2025\",\n    \"cupoMaximo\": 2,\n    \"estado\": 1,\n    \"titulo\": \"Parcial 2 Practico Web\",\n    \"estudiantes\": [\n        {\n            \"id\": 1,\n            \"nombre\": \"Juan Pablo\",\n            \"cedula\": 1025553432,\n            \"programa\": \"Ing. Sistemas\",\n            \"semestre\": 7,\n            \"correo\": \"j.baldion@uniandes.edu.co\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Finalizar una actividad aún con cupo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {\r",
+							"   pm.response.to.have.status(412);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"No puede poner este estado a una actividad con cupo\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{baseUrl}}/actividades/{{actividad_id}}?estado=2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"actividades",
+						"{{actividad_id}}"
+					],
+					"query": [
+						{
+							"key": "estado",
+							"value": "2"
+						}
+					]
+				},
+				"description": "Se prueba este servicio ya que es el que permite probar si se validan las reglas de negocio y cualque error encontrado lo devuelve de forma diciente."
+			},
+			"response": [
+				{
+					"name": "Ejemplo cambiar estado de una actividad aún con cupo",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/actividades/1?estado=2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"actividades",
+								"1"
+							],
+							"query": [
+								{
+									"key": "estado",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "82"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"52-i/y6yOKIxugZJjm7cJmidvtlX8Q\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 02:41:04 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"No puede poner este estado a una actividad con cupo\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener actividades por fecha",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Number of actividades > ' + 0, function () {\r",
+							"   var data = pm.response.json()\r",
+							"   pm.expect(data.length).to.greaterThan(0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{baseUrl}}/actividades?fecha=17-05-2025",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"actividades"
+					],
+					"query": [
+						{
+							"key": "fecha",
+							"value": "17-05-2025"
+						}
+					]
+				},
+				"description": "Se prueba este servicio ya que es el que permite probar si se pueden obtener todas las actividades por fecha."
+			},
+			"response": [
+				{
+					"name": "Ejemplo obtener las actvidades por fecha",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/actividades?fecha=17-05-2025",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"actividades"
+							],
+							"query": [
+								{
+									"key": "fecha",
+									"value": "17-05-2025"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "91"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"5b-vHv65TcMrmVPf06tfKD4gyyWl80\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 02:38:22 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"fecha\": \"17-05-2025\",\n        \"cupoMaximo\": 2,\n        \"estado\": 1,\n        \"titulo\": \"Parcial 2 Practico Web\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Obtener actividades por una fecha inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"No hay actividades para la fecha proporcionada\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/actividades?fecha=00-00-0000",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"actividades"
+					],
+					"query": [
+						{
+							"key": "fecha",
+							"value": "00-00-0000"
+						}
+					]
+				},
+				"description": "Se prueba este servicio ya que es el que permite probar si se validan las reglas de negocio y cualque error encontrado lo devuelve de forma diciente."
+			},
+			"response": [
+				{
+					"name": "Ejemplo obtener las actvidades por fecha",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/actividades?fecha=17-05-2025",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"actividades"
+							],
+							"query": [
+								{
+									"key": "fecha",
+									"value": "17-05-2025"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "91"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"5b-vHv65TcMrmVPf06tfKD4gyyWl80\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 02:38:22 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"fecha\": \"17-05-2025\",\n        \"cupoMaximo\": 2,\n        \"estado\": 1,\n        \"titulo\": \"Parcial 2 Practico Web\"\n    }\n]"
+				}
+			]
+		}
+	]
+}

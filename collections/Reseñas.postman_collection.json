@@ -1,0 +1,1233 @@
+{
+	"info": {
+		"_postman_id": "0a13c8ae-1402-459b-b455-5434bf3a2b5e",
+		"name": "Reseñas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42132129"
+	},
+	"item": [
+		{
+			"name": "Crear Actividad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"actividad_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"Parcial 2 Practico Web\",\r\n    \"fecha\": \"17-05-2025\",\r\n    \"cupoMaximo\": 1,\r\n    \"estado\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/actividades",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"actividades"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear Actividad Ejemplo",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Parcial 2 Practico Web\",\r\n    \"fecha\": \"17-05-2025\",\r\n    \"cupoMaximo\": 3,\r\n    \"estado\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/actividades",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"actividades"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "89"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"59-FQF3gTZ6TblRCB4cVNx0LKdYtxc\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 17 May 2025 18:55:27 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"fecha\": \"17-05-2025\",\n    \"cupoMaximo\": 3,\n    \"estado\": 0,\n    \"titulo\": \"Parcial 2 Practico Web\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear Estudiante",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"estudiante_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Juan Pablo\",\r\n    \"cedula\": 1025553432,\r\n    \"correo\": \"j.baldion@uniandes.edu.co\",\r\n    \"programa\": \"Ing. Sistemas\",\r\n    \"semestre\": 7\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/estudiantes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiantes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Ejemplo crear Estudiante",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Juan Pablo\",\r\n    \"cedula\": 1025553432,\r\n    \"correo\": \"j.baldion@uniandes.edu.co\",\r\n    \"programa\": \"Ing. Sistemas\",\r\n    \"semestre\": 7\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/estudiantes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiantes"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "127"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"7f-oaFYNYkB+E71ur7FfCDiKRxBwKs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 17 May 2025 18:24:29 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"nombre\": \"Juan Pablo\",\n    \"cedula\": 1025553432,\n    \"programa\": \"Ing. Sistemas\",\n    \"semestre\": 7,\n    \"correo\": \"j.baldion@uniandes.edu.co\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Inscribir un estudiante a una actividad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"estudiante_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/estudiantes/{{estudiante_id}}/actividades/{{actividad_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiantes",
+						"{{estudiante_id}}",
+						"actividades",
+						"{{actividad_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Ejemplo inscribir estudiante en un actividad",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/estudiantes/1/actividades/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiantes",
+								"1",
+								"actividades",
+								"1"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "233"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"e9-6hQmfrOCnvuiGde9A9IZTwgQdTw\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 02:38:11 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"nombre\": \"Juan Pablo\",\n    \"cedula\": 1025553432,\n    \"programa\": \"Ing. Sistemas\",\n    \"semestre\": 7,\n    \"correo\": \"j.baldion@uniandes.edu.co\",\n    \"actividades\": [\n        {\n            \"id\": 1,\n            \"fecha\": \"17-05-2025\",\n            \"cupoMaximo\": 2,\n            \"estado\": 0,\n            \"titulo\": \"Parcial 2 Practico Web\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Cambiar estado de una actividad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{baseUrl}}/actividades/{{actividad_id}}?estado=2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"actividades",
+						"{{actividad_id}}"
+					],
+					"query": [
+						{
+							"key": "estado",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Cambiar estado de una actividad",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/actividades/1?estado=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"actividades",
+								"1"
+							],
+							"query": [
+								{
+									"key": "estado",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "233"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"e9-m2IxIADb5/2i1q6ykvYenM4vY2E\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 02:38:15 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"fecha\": \"17-05-2025\",\n    \"cupoMaximo\": 2,\n    \"estado\": 1,\n    \"titulo\": \"Parcial 2 Practico Web\",\n    \"estudiantes\": [\n        {\n            \"id\": 1,\n            \"nombre\": \"Juan Pablo\",\n            \"cedula\": 1025553432,\n            \"programa\": \"Ing. Sistemas\",\n            \"semestre\": 7,\n            \"correo\": \"j.baldion@uniandes.edu.co\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear Reseña",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"resena_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"comentario\": \"Muy buen actividad 10 de 10\",\r\n    \"calificacion\": 4,\r\n    \"fecha\": \"18-05-2025\",\r\n    \"estudiante\": {\r\n        \"id\": {{estudiante_id}}\r\n    },\r\n    \"actividad\":{\r\n        \"id\": {{actividad_id}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/resenas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"resenas"
+					]
+				},
+				"description": "Se prueba este servicio ya que es el que permite probar si se pude crear una rese;a sobre una actividad"
+			},
+			"response": [
+				{
+					"name": "Crear Reseña",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comentario\": \"Muy buen actividad 10 de 10\",\r\n    \"calificacion\": 4,\r\n    \"fecha\": \"18-05-2025\",\r\n    \"estudiante\": {\r\n        \"id\": {{estudiante_id}}\r\n    },\r\n    \"actividad\":{\r\n        \"id\": {{actividad_id}}\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/resenas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"resenas"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "438"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1b6-PtKReNDkXl8JLHhDm5Xhzkh6/z4\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 03:10:26 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 2,\n    \"comentario\": \"Muy buen actividad 10 de 10\",\n    \"calificacion\": 4,\n    \"fecha\": \"18-05-2025\",\n    \"estudiante\": {\n        \"id\": 1,\n        \"nombre\": \"Juan Pablo\",\n        \"cedula\": 1025553432,\n        \"programa\": \"Ing. Sistemas\",\n        \"semestre\": 7,\n        \"correo\": \"j.baldion@uniandes.edu.co\",\n        \"actividades\": [\n            {\n                \"id\": 1,\n                \"fecha\": \"17-05-2025\",\n                \"cupoMaximo\": 1,\n                \"estado\": 2,\n                \"titulo\": \"Parcial 2 Practico Web\"\n            }\n        ]\n    },\n    \"actividad\": {\n        \"id\": 1,\n        \"fecha\": \"17-05-2025\",\n        \"cupoMaximo\": 1,\n        \"estado\": 2,\n        \"titulo\": \"Parcial 2 Practico Web\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear Actividad Estado 0",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"actividad_id_2\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"Parcial 2 Practico Web\",\r\n    \"fecha\": \"17-05-2025\",\r\n    \"cupoMaximo\": 1,\r\n    \"estado\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/actividades",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"actividades"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear Actividad Ejemplo",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Parcial 2 Practico Web\",\r\n    \"fecha\": \"17-05-2025\",\r\n    \"cupoMaximo\": 3,\r\n    \"estado\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/actividades",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"actividades"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "89"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"59-FQF3gTZ6TblRCB4cVNx0LKdYtxc\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 17 May 2025 18:55:27 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"fecha\": \"17-05-2025\",\n    \"cupoMaximo\": 3,\n    \"estado\": 0,\n    \"titulo\": \"Parcial 2 Practico Web\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear Estudiante 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"estudiante_id_2\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Juan Pablo\",\r\n    \"cedula\": 1025553432,\r\n    \"correo\": \"j.baldion@uniandes.edu.co\",\r\n    \"programa\": \"Ing. Sistemas\",\r\n    \"semestre\": 7\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/estudiantes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiantes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Ejemplo crear Estudiante",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Juan Pablo\",\r\n    \"cedula\": 1025553432,\r\n    \"correo\": \"j.baldion@uniandes.edu.co\",\r\n    \"programa\": \"Ing. Sistemas\",\r\n    \"semestre\": 7\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/estudiantes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiantes"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "127"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"7f-oaFYNYkB+E71ur7FfCDiKRxBwKs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 17 May 2025 18:24:29 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"nombre\": \"Juan Pablo\",\n    \"cedula\": 1025553432,\n    \"programa\": \"Ing. Sistemas\",\n    \"semestre\": 7,\n    \"correo\": \"j.baldion@uniandes.edu.co\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Inscribir un estudiante a una actividad 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"estudiante_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/estudiantes/{{estudiante_id_2}}/actividades/{{actividad_id_2}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiantes",
+						"{{estudiante_id_2}}",
+						"actividades",
+						"{{actividad_id_2}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Ejemplo inscribir estudiante en un actividad",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/estudiantes/1/actividades/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiantes",
+								"1",
+								"actividades",
+								"1"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "233"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"e9-6hQmfrOCnvuiGde9A9IZTwgQdTw\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 02:38:11 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"nombre\": \"Juan Pablo\",\n    \"cedula\": 1025553432,\n    \"programa\": \"Ing. Sistemas\",\n    \"semestre\": 7,\n    \"correo\": \"j.baldion@uniandes.edu.co\",\n    \"actividades\": [\n        {\n            \"id\": 1,\n            \"fecha\": \"17-05-2025\",\n            \"cupoMaximo\": 2,\n            \"estado\": 0,\n            \"titulo\": \"Parcial 2 Practico Web\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear Reseña de una actividad no finalizada",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {\r",
+							"   pm.response.to.have.status(412);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"No se puede agregar reseña a una actividad que no ha sido finalizada\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"comentario\": \"Muy buen actividad 10 de 10\",\r\n    \"calificacion\": 4,\r\n    \"fecha\": \"18-05-2025\",\r\n    \"estudiante\": {\r\n        \"id\": {{estudiante_id_2}}\r\n    },\r\n    \"actividad\":{\r\n        \"id\": {{actividad_id_2}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/resenas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"resenas"
+					]
+				},
+				"description": "Se prueba este servicio ya que es el que permite probar si se validan las reglas de negocio y cualque error encontrado lo devuelve de forma diciente."
+			},
+			"response": [
+				{
+					"name": "Crear Reseña de una actividad no finalizada",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comentario\": \"Muy buen actividad 10 de 10\",\r\n    \"calificacion\": 4,\r\n    \"fecha\": \"18-05-2025\",\r\n    \"estudiante\": {\r\n        \"id\": {{estudiante_id_2}}\r\n    },\r\n    \"actividad\":{\r\n        \"id\": {{actividad_id_2}}\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/resenas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"resenas"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "100"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"64-zIzIR8WobxtV+NdDoJaUQYk4mQw\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 03:45:00 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"No se puede agregar reseña a una actividad que no ha sido finalizada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear Reseña de con un estudiante que no tomo la actividad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {\r",
+							"   pm.response.to.have.status(412);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"El estudiante no ha participado en esta actividad\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"comentario\": \"Muy buen actividad 10 de 10\",\r\n    \"calificacion\": 4,\r\n    \"fecha\": \"18-05-2025\",\r\n    \"estudiante\": {\r\n        \"id\": {{estudiante_id_2}}\r\n    },\r\n    \"actividad\":{\r\n        \"id\": {{actividad_id}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/resenas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"resenas"
+					]
+				},
+				"description": "Se prueba este servicio ya que es el que permite probar si se validan las reglas de negocio y cualque error encontrado lo devuelve de forma diciente."
+			},
+			"response": [
+				{
+					"name": "Crear Reseña de con un estudiante que no tomo la actividad",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comentario\": \"Muy buen actividad 10 de 10\",\r\n    \"calificacion\": 4,\r\n    \"fecha\": \"18-05-2025\",\r\n    \"estudiante\": {\r\n        \"id\": {{estudiante_id_2}}\r\n    },\r\n    \"actividad\":{\r\n        \"id\": {{actividad_id}}\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/resenas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"resenas"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "80"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"50-GMtBgPnZ8d5YYEIf/m1Ksf8G8rk\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 03:46:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"El estudiante no ha participado en esta actividad\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener una resena por id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"comentario\": \"Muy buen actividad 10 de 10\",\r\n    \"calificacion\": 4,\r\n    \"fecha\": \"18-05-2025\",\r\n    \"estudiante\": {\r\n        \"id\": {{estudiante_id_2}}\r\n    },\r\n    \"actividad\":{\r\n        \"id\": {{actividad_id}}\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/resenas/{{resena_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"resenas",
+						"{{resena_id}}"
+					]
+				},
+				"description": "Se prueba este servicio ya que es el que permite probar si se pueden obtener las rese;as por su id"
+			},
+			"response": [
+				{
+					"name": "Ejemplo Obtener una resena por id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comentario\": \"Muy buen actividad 10 de 10\",\r\n    \"calificacion\": 4,\r\n    \"fecha\": \"18-05-2025\",\r\n    \"estudiante\": {\r\n        \"id\": {{estudiante_id_2}}\r\n    },\r\n    \"actividad\":{\r\n        \"id\": {{actividad_id}}\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/resenas/{{resena_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"resenas",
+								"{{resena_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "89"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"59-EXTEINqe982UXxsD7UdwL5ZUtoc\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 03:22:03 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"comentario\": \"Muy buen actividad 10 de 10\",\n    \"calificacion\": 4,\n    \"fecha\": \"18-05-2025\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener una resena por id invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"No se encontró la reseña con el id 0\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"comentario\": \"Muy buen actividad 10 de 10\",\r\n    \"calificacion\": 4,\r\n    \"fecha\": \"18-05-2025\",\r\n    \"estudiante\": {\r\n        \"id\": {{estudiante_id_2}}\r\n    },\r\n    \"actividad\":{\r\n        \"id\": {{actividad_id}}\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/resenas/0",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"resenas",
+						"0"
+					]
+				},
+				"description": "Se prueba este servicio ya que es el que permite probar si se validan las reglas de negocio y cualque error encontrado lo devuelve de forma diciente."
+			},
+			"response": [
+				{
+					"name": "Obtener una resena por id invalido",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comentario\": \"Muy buen actividad 10 de 10\",\r\n    \"calificacion\": 4,\r\n    \"fecha\": \"18-05-2025\",\r\n    \"estudiante\": {\r\n        \"id\": {{estudiante_id_2}}\r\n    },\r\n    \"actividad\":{\r\n        \"id\": {{actividad_id}}\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/resenas/0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"resenas",
+								"0"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "69"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"45-5hYWjiSlWA84i52ZWMH4QU1Oq60\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 03:46:32 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"No se encontró la reseña con el id 0\"\n}"
+				}
+			]
+		}
+	]
+}

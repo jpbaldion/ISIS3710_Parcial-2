@@ -1,0 +1,517 @@
+{
+	"info": {
+		"_postman_id": "b6547d64-0246-42a6-92da-546966889f30",
+		"name": "Estudiantes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42132129"
+	},
+	"item": [
+		{
+			"name": "Crear Estudiante",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"estudiante_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Juan Pablo\",\r\n    \"cedula\": 1025553432,\r\n    \"correo\": \"j.baldion@uniandes.edu.co\",\r\n    \"programa\": \"Ing. Sistemas\",\r\n    \"semestre\": 7\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/estudiantes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiantes"
+					]
+				},
+				"description": "Se prueba este servicio ya que es el que permite probar si es posible crear un estudiante."
+			},
+			"response": [
+				{
+					"name": "Ejemplo crear Estudiante",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Juan Pablo\",\r\n    \"cedula\": 1025553432,\r\n    \"correo\": \"j.baldion@uniandes.edu.co\",\r\n    \"programa\": \"Ing. Sistemas\",\r\n    \"semestre\": 7\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/estudiantes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiantes"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "127"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"7f-oaFYNYkB+E71ur7FfCDiKRxBwKs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 17 May 2025 18:24:29 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"nombre\": \"Juan Pablo\",\n    \"cedula\": 1025553432,\n    \"programa\": \"Ing. Sistemas\",\n    \"semestre\": 7,\n    \"correo\": \"j.baldion@uniandes.edu.co\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear Estudiante con Email Invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"   pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message[0]).to.eql(\"correo must be an email\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Juan Pablo\",\r\n    \"cedula\": 1025553432,\r\n    \"correo\": \"correo\",\r\n    \"programa\": \"Ing. Sistemas\",\r\n    \"semestre\": 7\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/estudiantes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiantes"
+					]
+				},
+				"description": "Se prueba este servicio ya que es el que permite probar si se validan las reglas de negocio y cualque error encontrado lo devuelve de forma diciente."
+			},
+			"response": [
+				{
+					"name": "Crear Estudiante con Email Invalido Ejemplo",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Juan Pablo\",\r\n    \"cedula\": 1025553432,\r\n    \"correo\": \"correo\",\r\n    \"programa\": \"Ing. Sistemas\",\r\n    \"semestre\": 7\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/estudiantes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiantes"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "78"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4e-Mnrhvjupube0WguA0M6GTtqUdPQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 17 May 2025 18:28:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": [\n        \"correo must be an email\"\n    ],\n    \"error\": \"Bad Request\",\n    \"statusCode\": 400\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear Estudiante con semestre invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {\r",
+							"   pm.response.to.have.status(412);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"El semestre del estudiante no es válido\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Juan Pablo\",\r\n    \"cedula\": 1025553432,\r\n    \"correo\": \"j.baldion@uniandes.edu.co\",\r\n    \"programa\": \"Ing. Sistemas\",\r\n    \"semestre\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/estudiantes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiantes"
+					]
+				},
+				"description": "Se prueba este servicio ya que es el que permite probar si se validan las reglas de negocio y cualque error encontrado lo devuelve de forma diciente."
+			},
+			"response": [
+				{
+					"name": "Crear Estudiante con semestre invalido",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Juan Pablo\",\r\n    \"cedula\": 1025553432,\r\n    \"correo\": \"j.baldion@uniandes.edu.co\",\r\n    \"programa\": \"Ing. Sistemas\",\r\n    \"semestre\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/estudiantes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiantes"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "71"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"47-K0abirQOP2eVUZNAZVc8q5TwF78\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 18 May 2025 03:47:08 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"El semestre del estudiante no es válido\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un estudiante por id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/estudiantes/{{estudiante_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiantes",
+						"{{estudiante_id}}"
+					]
+				},
+				"description": "Se prueba este servicio ya que es el que permite probar si es posible obtener un estudiante por su id"
+			},
+			"response": [
+				{
+					"name": "Obtener un estudiante por id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/estudiantes/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiantes",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "127"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"7f-oaFYNYkB+E71ur7FfCDiKRxBwKs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 17 May 2025 18:37:33 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"nombre\": \"Juan Pablo\",\n    \"cedula\": 1025553432,\n    \"programa\": \"Ing. Sistemas\",\n    \"semestre\": 7,\n    \"correo\": \"j.baldion@uniandes.edu.co\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un estudiante por id invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"El estudiante no existe\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Juan Pablo\",\r\n    \"cedula\": 1025553432,\r\n    \"correo\": \"j.baldion@uniandes.edu.co\",\r\n    \"programa\": \"Ing. Sistemas\",\r\n    \"semestre\": 7\r\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/estudiantes/0",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiantes",
+						"0"
+					]
+				},
+				"description": "Se prueba este servicio ya que es el que permite probar si se validan las reglas de negocio y cualque error encontrado lo devuelve de forma diciente."
+			},
+			"response": [
+				{
+					"name": "Obtener un estudiante por id invalido",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Juan Pablo\",\r\n    \"cedula\": 1025553432,\r\n    \"correo\": \"j.baldion@uniandes.edu.co\",\r\n    \"programa\": \"Ing. Sistemas\",\r\n    \"semestre\": 7\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/estudiantes/0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"estudiantes",
+								"0"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "54"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"36-tEUtaygNFRHCJeZ/V+KS3IwiTFI\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 17 May 2025 18:38:23 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"El estudiante no existe\"\n}"
+				}
+			]
+		}
+	]
+}
