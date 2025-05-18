@@ -1,10 +1,10 @@
 import { Actividad } from '../../actividad/entities/actividad.entity';
 import { Estudiante } from '../../estudiante/entities/estudiante.entity';
-import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Resena {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: number;
   @Column()
   comentario: string;

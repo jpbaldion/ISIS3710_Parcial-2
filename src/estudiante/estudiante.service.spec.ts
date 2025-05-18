@@ -139,13 +139,13 @@ describe('EstudianteService', () => {
 
   it('deberia inscribir un estudiante a una actividad', async () => {
     const estudiante: Estudiante = estudianteList[0];
-    const newEstudiante: Estudiante = await service.incribirseActividad(
+    const newEstudiante: Estudiante | null = await service.incribirseActividad(
       estudiante.id,
       actividad.id,
     );
     expect(newEstudiante).not.toBeNull();
-    expect(newEstudiante.actividades.length).toEqual(1);
-    expect(newEstudiante.actividades[0].id).toEqual(actividad.id);
+    expect(newEstudiante!.actividades.length).toEqual(1);
+    expect(newEstudiante!.actividades[0].id).toEqual(actividad.id);
   });
 
   it('deberia lanzar una excepcion por estudiante no encontrado al inscribir', async () => {

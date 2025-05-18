@@ -55,7 +55,8 @@ export class ResenaService {
         BusinessError.PRECONDITION_FAILED,
       );
     }
-
+    resena.actividad = actividad;
+    resena.estudiante = estudiante;
     return await this.resenaRepository.save(resena);
   }
 

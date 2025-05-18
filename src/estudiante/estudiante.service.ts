@@ -84,12 +84,22 @@ export class EstudianteService {
       );
     }
 
+    if (actividad.estudiantes.length >= actividad.cupoMaximo) {
+      throw new BusinessLogicException(
+        'La actividad no tiene cupo disponible',
+        BusinessError.PRECONDITION_FAILED,
+      );
+    }
+
     estudiante.actividades.push(actividad);
     actividad.estudiantes.push(estudiante);
 
     await this.estudianteRepository.save(estudiante);
     await this.actividadRepository.save(actividad);
 
-    return estudiante;
+    return await this.estudianteRepository.findOne({
+      where: { id: idEstudiante },
+      relations: ['actividades'],
+    });
   }
 }

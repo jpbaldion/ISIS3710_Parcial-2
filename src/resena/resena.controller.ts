@@ -1,10 +1,19 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  UseInterceptors,
+} from '@nestjs/common';
 import { ResenaService } from './resena.service';
 import { ResenaDetailDto } from './dto/resenaDetail.dto';
 import { plainToInstance } from 'class-transformer';
 import { Resena } from './entities/resena.entity';
+import { BusinessErrorsInterceptor } from 'src/shared/interceptors/business-errors.interceptor';
 
-@Controller('resena')
+@Controller('resenas')
+@UseInterceptors(BusinessErrorsInterceptor)
 export class ResenaController {
   constructor(private readonly resenaService: ResenaService) {}
 

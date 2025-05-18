@@ -1,10 +1,21 @@
-import { Controller, Get, Post, Body, Put, Param, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Put,
+  Param,
+  Query,
+  UseInterceptors,
+} from '@nestjs/common';
 import { ActividadService } from './actividad.service';
 import { ActividadDto } from './dto/actividad.dto';
 import { plainToInstance } from 'class-transformer';
 import { Actividad } from './entities/actividad.entity';
+import { BusinessErrorsInterceptor } from 'src/shared/interceptors/business-errors.interceptor';
 
 @Controller('actividades')
+@UseInterceptors(BusinessErrorsInterceptor)
 export class ActividadController {
   constructor(private readonly actividadService: ActividadService) {}
 
@@ -20,7 +31,7 @@ export class ActividadController {
   }
 
   @Put(':id')
-  update(@Param(':id') id: string, @Query('estado') estado: number) {
-    return this.actividadService.cambiarEstado(+id, estado);
+  update(@Param('id') id: string, @Query('estado') estado: number) {
+    return this.actividadService.cambiarEstado(+id, +estado);
   }
 }

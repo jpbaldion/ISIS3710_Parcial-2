@@ -1,6 +1,9 @@
-import { IsEmail, IsString, IsInt } from 'class-validator';
+import { IsEmail, IsString, IsInt, IsOptional } from 'class-validator';
 
 export class EstudianteDto {
+  @IsInt()
+  @IsOptional()
+  readonly id: number;
   @IsString()
   readonly nombre: string;
   @IsInt()
